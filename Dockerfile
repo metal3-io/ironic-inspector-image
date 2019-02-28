@@ -7,6 +7,7 @@ RUN yum install -y openstack-ironic-inspector crudini psmisc
 RUN crudini --set /etc/ironic-inspector/inspector.conf DEFAULT auth_strategy noauth && \ 
     crudini --set /etc/ironic-inspector/inspector.conf ironic auth_strategy noauth && \
     crudini --set /etc/ironic-inspector/inspector.conf DEFAULT debug true && \
+    crudini --set /etc/ironic-inspector/inspector.conf DEFAULT transport_url fake:// && \
     crudini --set /etc/ironic-inspector/inspector.conf processing store_data database && \
     crudini --set /etc/ironic-inspector/inspector.conf pxe_filter driver noop
 
