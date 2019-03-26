@@ -17,6 +17,7 @@ RUN crudini --set /etc/ironic-inspector/inspector.conf DEFAULT auth_strategy noa
     crudini --set /etc/ironic-inspector/inspector.conf processing node_not_found_hook enroll && \
     crudini --set /etc/ironic-inspector/inspector.conf discovery enroll_node_driver ipmi
 
+
 RUN ironic-inspector-dbsync --config-file /etc/ironic-inspector/inspector.conf upgrade 
 
 COPY ./runironic-inspector.sh /bin/runironic-inspector
