@@ -13,7 +13,9 @@ RUN crudini --set /etc/ironic-inspector/inspector.conf DEFAULT auth_strategy noa
     crudini --set /etc/ironic-inspector/inspector.conf database connection sqlite:///var/lib/ironic-inspector/ironic-inspector.db && \
     crudini --set /etc/ironic-inspector/inspector.conf DEFAULT transport_url fake:// && \
     crudini --set /etc/ironic-inspector/inspector.conf processing store_data database && \
-    crudini --set /etc/ironic-inspector/inspector.conf pxe_filter driver noop
+    crudini --set /etc/ironic-inspector/inspector.conf pxe_filter driver noop && \
+    crudini --set /etc/ironic-inspector/inspector.conf processing node_not_found_hook enroll && \
+    crudini --set /etc/ironic-inspector/inspector.conf discovery enroll_node_driver ipmi
 
 RUN ironic-inspector-dbsync --config-file /etc/ironic-inspector/inspector.conf upgrade 
 
