@@ -7,8 +7,8 @@ function killcontainer(){
 }
 
 while true ; do
-    sleep 10
+    sleep 30
 
-    curl -s http://172.22.0.1:5050 > /dev/null || ( echo "Can't contact ironic-inspector-api" && exit 1 )
+    curl -s http://localhost:5050 > /dev/null || ( echo "Can't contact ironic-inspector-api" && exit 1 )
 
 done
