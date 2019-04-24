@@ -7,4 +7,9 @@ if ! iptables -C INPUT -i $INTERFACE -p tcp -m tcp --dport 5050 -j ACCEPT > /dev
     iptables -I INPUT -i $INTERFACE -p tcp -m tcp --dport 5050 -j ACCEPT
 fi
 
-/usr/bin/python2 /usr/bin/ironic-inspector --config-file /etc/ironic-inspector/inspector-dist.conf --config-file /etc/ironic-inspector/inspector.conf
+# Remove log files from last deployment
+rm -rf /shared/log/ironic-inspector
+
+mkdir -p /shared/log/ironic-inspector
+
+/usr/bin/python2 /usr/bin/ironic-inspector --config-file /etc/ironic-inspector/inspector-dist.conf --config-file /etc/ironic-inspector/inspector.conf --log-file /shared/log/ironic-inspector/ironic-inspector.log
