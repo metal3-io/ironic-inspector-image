@@ -1,10 +1,10 @@
 #!/usr/bin/bash
 
-INTERFACE=${INTERFACE:-"provisioning"}
+PROVISIONING_INTERFACE=${PROVISIONING_INTERFACE:-"provisioning"}
 
 # Allow access to Ironic inspector API
-if ! iptables -C INPUT -i $INTERFACE -p tcp -m tcp --dport 5050 -j ACCEPT > /dev/null 2>&1; then
-    iptables -I INPUT -i $INTERFACE -p tcp -m tcp --dport 5050 -j ACCEPT
+if ! iptables -C INPUT -i "$PROVISIONING_INTERFACE" -p tcp -m tcp --dport 5050 -j ACCEPT > /dev/null 2>&1; then
+    iptables -I INPUT -i "$PROVISIONING_INTERFACE" -p tcp -m tcp --dport 5050 -j ACCEPT
 fi
 
 # Remove log files from last deployment
