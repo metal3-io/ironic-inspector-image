@@ -20,7 +20,7 @@ RUN crudini --set /etc/ironic-inspector/inspector.conf DEFAULT auth_strategy noa
     crudini --set /etc/ironic-inspector/inspector.conf pxe_filter driver noop && \
     crudini --set /etc/ironic-inspector/inspector.conf processing node_not_found_hook enroll && \
     crudini --set /etc/ironic-inspector/inspector.conf discovery enroll_node_driver ipmi && \
-    crudini --set /etc/ironic-inspector/inspector.conf processing processing_hooks "\$default_processing_hooks,lldp_basic" && \
+    crudini --set /etc/ironic-inspector/inspector.conf processing processing_hooks "\$default_processing_hooks,extra_hardware,lldp_basic" && \
     # NOTE(dtantsur): keep this in sync with ironic-image/inspector.ipxe
     # TODO(dtantsur): add ipa_inspection_collectors once we get ironic-lib 2.17.1
     crudini --set /etc/ironic-inspector/inspector.conf mdns params 'ipa_debug:1,ipa_inspection_dhcp_all_interfaces:1,ipa_collect_lldp:1'
