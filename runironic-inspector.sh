@@ -11,8 +11,11 @@ if ! iptables -C INPUT -i "$PROVISIONING_INTERFACE" -p tcp -m tcp --dport 5050 -
 fi
 
 # Allow access to mDNS
-if ! iptables -i $PROVISIONING_INTERFACE -p udp --dport 5353 -j ACCEPT > /dev/null 2>&1; then
-    iptables -i $PROVISIONING_INTERFACE -p udp --dport 5353 -j ACCEPT
+if ! iptables -C INPUT -i $PROVISIONING_INTERFACE -p udp --dport 5353 -j ACCEPT > /dev/null 2>&1; then
+    iptables -I INPUT -i $PROVISIONING_INTERFACE -p udp --dport 5353 -j ACCEPT
+fi
+if ! iptables -C OUTPUT -p udp --dport 5353 -j ACCEPT > /dev/null 2>&1; then
+    iptables -I OUTPUT -p udp --dport 5353 -j ACCEPT
 fi
 
 # Remove log files from last deployment
