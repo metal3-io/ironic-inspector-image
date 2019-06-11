@@ -3,7 +3,8 @@ FROM docker.io/centos:centos7
 RUN yum install -y python-requests && \
     curl https://raw.githubusercontent.com/openstack/tripleo-repos/master/tripleo_repos/main.py | python - current-tripleo && \
     yum update -y && \
-    yum install -y openstack-ironic-inspector crudini psmisc iproute iptables
+    yum install -y openstack-ironic-inspector crudini psmisc iproute iptables && \
+    yum clean all
 
 RUN mkdir -p /var/lib/ironic-inspector && \
     sqlite3 /var/lib/ironic-inspector/ironic-inspector.db "pragma journal_mode=wal"
