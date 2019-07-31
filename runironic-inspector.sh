@@ -29,4 +29,7 @@ crudini --set $CONFIG ironic endpoint_override http://$PROVISIONING_IP:6385
 crudini --set $CONFIG service_catalog endpoint_override http://$PROVISIONING_IP:5050
 crudini --set $CONFIG mdns interfaces $PROVISIONING_IP
 
-/usr/bin/python2 /usr/bin/ironic-inspector --config-file /etc/ironic-inspector/inspector-dist.conf --config-file /etc/ironic-inspector/inspector.conf --log-file /shared/log/ironic-inspector/ironic-inspector.log
+exec /usr/bin/ironic-inspector --config-file /etc/ironic-inspector/inspector-dist.conf \
+	--config-file /etc/ironic-inspector/inspector.conf \
+	--log-file /shared/log/ironic-inspector/ironic-inspector.log
+
