@@ -5,6 +5,12 @@ PROVISIONING_INTERFACE=${PROVISIONING_INTERFACE:-"provisioning"}
 CONFIG=/etc/ironic-inspector/inspector.conf
 PROVISIONING_IP=$(ip -4 address show dev "$PROVISIONING_INTERFACE" | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | head -n 1)
 
+until [ ! -z "${PROVISIONING_IP}" ]; do
+  echo "Waiting for ${PROVISIONING_INTERFACE} interface to be configured"
+  sleep 1
+  PROVISIONING_IP=$(ip -4 address show dev "$PROVISIONING_INTERFACE" | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | head -n 1)
+done
+
 # Allow access to Ironic inspector API
 if ! iptables -C INPUT -i "$PROVISIONING_INTERFACE" -p tcp -m tcp --dport 5050 -j ACCEPT > /dev/null 2>&1; then
     iptables -I INPUT -i "$PROVISIONING_INTERFACE" -p tcp -m tcp --dport 5050 -j ACCEPT
