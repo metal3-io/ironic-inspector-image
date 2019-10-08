@@ -1,7 +1,7 @@
 FROM docker.io/centos:centos7
 
 RUN yum install -y python-requests && \
-    curl https://raw.githubusercontent.com/openstack/tripleo-repos/master/tripleo_repos/main.py | python - -b stein current-tripleo && \
+    curl https://raw.githubusercontent.com/openstack/tripleo-repos/master/tripleo_repos/main.py | python - -b train current-tripleo && \
     yum update -y && \
     yum install -y openstack-ironic-inspector crudini psmisc iproute iptables && \
     yum clean all && rm -rf /var/cache/yum/*
