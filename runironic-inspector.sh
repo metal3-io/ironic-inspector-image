@@ -6,19 +6,6 @@ CONFIG=/etc/ironic-inspector/inspector.conf
 
 wait_for_interface_or_ip
 
-# Allow access to Ironic inspector API
-if ! iptables -C INPUT -i "$PROVISIONING_INTERFACE" -p tcp -m tcp --dport 5050 -j ACCEPT > /dev/null 2>&1; then
-    iptables -I INPUT -i "$PROVISIONING_INTERFACE" -p tcp -m tcp --dport 5050 -j ACCEPT
-fi
-
-# Allow access to mDNS
-if ! iptables -C INPUT -i $PROVISIONING_INTERFACE -p udp --dport 5353 -j ACCEPT > /dev/null 2>&1; then
-    iptables -I INPUT -i $PROVISIONING_INTERFACE -p udp --dport 5353 -j ACCEPT
-fi
-if ! iptables -C OUTPUT -p udp --dport 5353 -j ACCEPT > /dev/null 2>&1; then
-    iptables -I OUTPUT -p udp --dport 5353 -j ACCEPT
-fi
-
 # Remove log files from last deployment
 rm -rf /shared/log/ironic-inspector
 
