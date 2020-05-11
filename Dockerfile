@@ -12,9 +12,8 @@ RUN dnf install -y python3 python3-requests && \
 
 COPY ./inspector.conf /tmp/inspector.conf
 RUN crudini --merge /etc/ironic-inspector/inspector.conf < /tmp/inspector.conf && \
-    rm /tmp/inspector.conf
-
-RUN ironic-inspector-dbsync --config-file /etc/ironic-inspector/inspector.conf upgrade 
+    rm /tmp/inspector.conf && \
+    ironic-inspector-dbsync --config-file /etc/ironic-inspector/inspector.conf upgrade
 
 COPY ./runironic-inspector.sh /bin/runironic-inspector
 COPY ./runhealthcheck.sh /bin/runhealthcheck
