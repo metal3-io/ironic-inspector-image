@@ -8,21 +8,24 @@ wait_for_interface_or_ip
 
 cp $CONFIG $CONFIG.orig
 
-if [ ! -z "$CERT_FILE" ] && [ ! -z "$KEY_FILE" ]; then
+if [ ! -z "$CLIENT_CERT_FILE" ] || [ ! -z "$CLIENT_KEY_FILE" ] || [ ! -z "$CACERT_FILE" ] || [ ! -z "$INSECURE" ]; then
     crudini --merge $CONFIG <<EOF
+[DEFAULT]
+host = $IRONIC_IP
+
 [ironic]
 endpoint_override = https://${IRONIC_URL_HOST}:6385
-certfile = $CERT_FILE
-keyfile = $KEY_FILE
-insecure = false
+$([ ! -z "$CLIENT_CERT_FILE" ] && echo "certfile = $CLIENT_CERT_FILE")
+$([ ! -z "$CLIENT_KEY_FILE" ] && echo "keyfile = $CLIENT_KEY_FILE")
 $([ ! -z "$CACERT_FILE" ] && echo "cafile = $CACERT_FILE")
+$([ ! -z "$INSECURE" ] && echo "insecure = $INSECURE" || echo "insecure = false")
 
 [service_catalog]
 endpoint_override = https://${IRONIC_URL_HOST}:6385
-certfile = $CERT_FILE
-keyfile = $KEY_FILE
-insecure = false
+$([ ! -z "$CLIENT_CERT_FILE" ] && echo "certfile = $CLIENT_CERT_FILE")
+$([ ! -z "$CLIENT_KEY_FILE" ] && echo "keyfile = $CLIENT_KEY_FILE")
 $([ ! -z "$CACERT_FILE" ] && echo "cafile = $CACERT_FILE")
+$([ ! -z "$INSECURE" ] && echo "insecure = $INSECURE" || echo "insecure = false")
 EOF
 else
     crudini --merge $CONFIG <<EOF
