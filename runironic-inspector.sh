@@ -43,4 +43,4 @@ sed -i "/Listen 80/c\#Listen 80" /etc/httpd/conf/httpd.conf
 /usr/sbin/httpd
 
 exec /usr/bin/ironic-inspector --config-file /etc/ironic-inspector/inspector-dist.conf \
-	--config-file /etc/ironic-inspector/inspector.conf
+	--config-file $CONFIG
