@@ -1,9 +1,13 @@
 FROM docker.io/centos:centos8
 
+ARG PKGS_LIST=main-packages-list.txt
+
+COPY ${PKGS_LIST} /tmp/main-packages-list.txt
+
 RUN dnf install -y python3 python3-requests && \
     curl https://raw.githubusercontent.com/openstack/tripleo-repos/master/tripleo_repos/main.py | python3 - -b master current-tripleo && \
-    dnf update -y && \
-    dnf install -y openstack-ironic-inspector crudini psmisc iproute sqlite && \
+    dnf upgrade -y && \
+    dnf install -y $(cat /tmp/main-packages-list.txt) && \
     mkdir -p /var/lib/ironic-inspector && \
     sqlite3 /var/lib/ironic-inspector/ironic-inspector.db "pragma journal_mode=wal" && \
     dnf remove -y sqlite && \
@@ -19,4 +23,3 @@ HEALTHCHECK CMD /bin/runhealthcheck
 RUN chmod +x /bin/runironic-inspector
 
 ENTRYPOINT ["/bin/runironic-inspector"]
-
