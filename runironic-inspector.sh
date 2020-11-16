@@ -2,6 +2,8 @@
 
 CONFIG=/etc/ironic-inspector/ironic-inspector.conf
 
+export IRONIC_INSPECTOR_ENABLE_DISCOVERY=${IRONIC_INSPECTOR_ENABLE_DISCOVERY:-false}
+
 export IRONIC_CERT_FILE=/certs/ironic/tls.crt
 export IRONIC_CACERT_FILE=/certs/ca/ironic/tls.crt
 export IRONIC_INSPECTOR_CACERT_FILE=/certs/ca/ironic-inspector/tls.crt
