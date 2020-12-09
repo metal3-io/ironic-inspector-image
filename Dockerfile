@@ -12,6 +12,5 @@ COPY ironic-inspector.conf.j2 /etc/ironic-inspector/
 COPY scripts/ /bin/
 
 HEALTHCHECK CMD /bin/runhealthcheck
-RUN chmod +x /bin/runironic-inspector
 
 ENTRYPOINT ["/bin/runironic-inspector"]
