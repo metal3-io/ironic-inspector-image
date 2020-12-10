@@ -9,7 +9,7 @@ RUN prepare-image.sh && \
   rm -f /bin/prepare-image.sh
 
 COPY ironic-inspector.conf.j2 /etc/ironic-inspector/
-COPY scripts/ /bin/
+COPY scripts/* /bin/
 
 HEALTHCHECK CMD /bin/runhealthcheck
 
