@@ -2,8 +2,8 @@ FROM docker.io/centos:centos8
 
 ARG PKGS_LIST=main-packages-list.txt
 
-COPY ${PKGS_LIST} /tmp/main-packages-list.txt
-COPY prepare-image.sh /bin/
+COPY ${PKGS_LIST} ${PATCH_LIST} /tmp/
+COPY prepare-image.sh patch-image.sh /bin/
 
 RUN prepare-image.sh && \
   rm -f /bin/prepare-image.sh
