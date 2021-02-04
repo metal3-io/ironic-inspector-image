@@ -11,3 +11,9 @@ sqlite3 /var/lib/ironic-inspector/ironic-inspector.db "pragma journal_mode=wal"
 dnf remove -y sqlite
 dnf clean all
 rm -rf /var/cache/{yum,dnf}/*
+if [[ ! -z ${PATCH_LIST} ]]; then
+    if [[ -s "/tmp/${PATCH_LIST}" ]]; then
+        /bin/patch-image.sh;
+    fi
+fi
+rm -f /bin/patch-image.sh
