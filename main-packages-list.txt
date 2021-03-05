@@ -3,3 +3,5 @@ iproute
 openstack-ironic-inspector >= 10.5.1-0.20201223120908.379b892.el8
 psmisc
 sqlite
+httpd
+mod_ssl 
