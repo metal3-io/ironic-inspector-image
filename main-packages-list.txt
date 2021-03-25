@@ -5,3 +5,4 @@ psmisc
 sqlite
 httpd
 mod_ssl 
+inotify-tools
