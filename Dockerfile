@@ -10,6 +10,10 @@ COPY prepare-image.sh patch-image.sh /bin/
 RUN prepare-image.sh && \
   rm -f /bin/prepare-image.sh
 
+RUN mkdir -p /var/lib/ironic-inspector && \
+  sqlite3 /var/lib/ironic-inspector/ironic-inspector.db "pragma journal_mode=wal" && \
+  dnf remove -y sqlite
+
 COPY ironic-inspector.conf.j2 /etc/ironic-inspector/
 COPY scripts/ /bin/
 

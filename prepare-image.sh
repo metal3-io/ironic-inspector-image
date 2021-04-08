@@ -1,4 +1,4 @@
- #!/usr/bin/bash
+#!/usr/bin/bash
 
 set -euxo pipefail
  
@@ -11,9 +11,7 @@ if [[ ! -z ${EXTRA_PKGS_LIST:-} ]]; then
         xargs -rtd'\n' dnf --setopt=install_weak_deps=False install -y < /tmp/${EXTRA_PKGS_LIST}
     fi
 fi
-mkdir -p /var/lib/ironic-inspector
-sqlite3 /var/lib/ironic-inspector/ironic-inspector.db "pragma journal_mode=wal"
-dnf remove -y sqlite
+
 dnf clean all
 rm -rf /var/cache/{yum,dnf}/*
 if [[ ! -z ${PATCH_LIST:-} ]]; then
@@ -22,3 +20,4 @@ if [[ ! -z ${PATCH_LIST:-} ]]; then
     fi
 fi
 rm -f /bin/patch-image.sh
+
