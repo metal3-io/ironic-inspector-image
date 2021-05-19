@@ -1,19 +1,9 @@
-# ironic-inspector-image
+#  This repository is deprecated and no longer maintained
 
-This repo contains the files needed to build the Ironic Inspector images used by Metal3.
+This repository is not accepting Pull Requests anymore and it will be
+removed after June 12th, 2021.
 
-When updated, builds are automatically triggered on https://quay.io/repository/metal3-io/ironic-inspector/
-
-Applying Patches to the image
------------------------------
-
-When building the image, it is possible to specify a patch of one or more
-upstream projects to apply to the image, passing a file with the patch list
-using the PATCH_LIST build argument.
-
-At the moment, only projects hosted in opendev.org are supported.
-
-Each line of the file is in the form "project_dir refspec" where:
-- project is the last part of the project url including the org, for example openstack/ironic-inspector
-- refspec is the gerrit refspec of the patch we want to test, for example refs/changes/96/766996/2
-
+The content of this repository has been moved and merged with the
+[ironic-image repository](https://github.com/metal3-io/ironic-image),
+if you'd like to continue contributing to the project, please submit all
+changes there.
